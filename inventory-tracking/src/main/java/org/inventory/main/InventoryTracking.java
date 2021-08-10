@@ -1,5 +1,7 @@
 package org.inventory.main;
 
+import org.inventory.view.*;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -44,11 +46,13 @@ public class InventoryTracking {
     
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		InventoryTracking tracker = new InventoryTracking();
+		//InventoryTracking tracker = new InventoryTracking();
 		
-		tracker.setup();
+		//tracker.setup();
 		
-		tracker.exit();
+		//tracker.exit();
+		
+		MainView mainView = new MainView();
 
 	}
 }
