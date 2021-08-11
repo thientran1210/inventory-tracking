@@ -1,7 +1,6 @@
-package org.inventory.main;
+package org.inventory.app;
 
-import org.inventory.view.*;
-
+import org.inventory.menu.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -51,8 +50,7 @@ public class InventoryTracking {
 		//tracker.setup();
 		
 		//tracker.exit();
-		
-		MainView mainView = new MainView();
-
+		MainController mainController = new MainController();
+		MainView mainView = new MainView(mainController);
 	}
 }
