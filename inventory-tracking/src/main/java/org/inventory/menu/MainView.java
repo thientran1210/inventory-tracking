@@ -30,7 +30,6 @@ public class MainView extends JPanel{
 		JButton stockAdjustmentBtn = new JButton("Stock Adjustment");//creating instance of JButton  
 		JButton stockMovementBtn = new JButton("Stock Movement Log");//creating instance of JButton  
 		btnList.add(addNewItemBtn);
-		addNewItemBtn.addActionListener(this.mainController);
 		btnList.add(addNewCategoryBtn);
 		btnList.add(addNewWarehouseBtn);
 		btnList.add(stockByWarehouseBtn);
@@ -39,6 +38,7 @@ public class MainView extends JPanel{
 		
 		for (int i = 0; i < btnList.size(); i++) {
 			btnList.get(i).setMaximumSize(new Dimension(200,20));
+			btnList.get(i).addActionListener(mainController);
 			mainPanel.add(btnList.get(i));
 		}		         
 		           
