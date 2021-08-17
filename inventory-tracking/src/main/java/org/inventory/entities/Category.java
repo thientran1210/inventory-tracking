@@ -1,4 +1,4 @@
-package org.inventory.dao;
+package org.inventory.entities;
 
 import javax.persistence.*;
 

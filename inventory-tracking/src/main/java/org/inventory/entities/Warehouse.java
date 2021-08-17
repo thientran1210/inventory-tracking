@@ -1,11 +1,12 @@
-package org.inventory.dao;
+package org.inventory.entities;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "location")
+@Table(name = "warehouse")
 public class Warehouse {
 	private long warehouseId;
+	private String warehouseCode;
 	private String address_1;
 	private String address_2;
 	private String state;
@@ -18,12 +19,22 @@ public class Warehouse {
 	@Id
 	@Column(name = "warehouse_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getLocationId() {
+	public long getWarehouseId() {
 		return warehouseId;
 	}
 
-	public void setLocationId(long locationId) {
+	public void setWarehouseId(long locationId) {
 		this.warehouseId = locationId;
+	}
+
+	@Column(name = "warehouse_code")
+	public String getWarehouseCode() {
+		return warehouseCode;
+	}
+
+	
+	public void setWarehouseCode(String warehouseCode) {
+		this.warehouseCode = warehouseCode;
 	}
 
 	public String getAddress_1() {
