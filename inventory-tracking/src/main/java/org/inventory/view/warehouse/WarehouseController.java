@@ -55,6 +55,13 @@ public class WarehouseController implements ActionListener{
 	}
 	
 	public void deleteButtonClick() {
-
+		//check if warehouse still have stock in it
+		//if yes then don't delete
+		//otherwise delete it
+		if (this.warehouseModel.stillHaveStock(this.warehouseView.getWarehouseId())) {
+			this.warehouseView.showDialog("Cannot delete. Warehouse " + this.warehouseView.getWarehouseCode() + " still has stock in it.");
+		} else {
+			this.warehouseModel.deleteWarehouse(this.warehouseView.getWarehouseId());
+		}
 	}
 }

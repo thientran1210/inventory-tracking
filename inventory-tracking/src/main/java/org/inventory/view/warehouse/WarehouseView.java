@@ -22,6 +22,7 @@ public class WarehouseView extends JPanel{
 	private JButton deleteBtn;
 	private JTable warehouseTable;
 	private WarehouseController warehouseController;
+	private long warehouseId;
 	
 	public WarehouseView() {
 		this.initializeView();
@@ -166,6 +167,14 @@ public class WarehouseView extends JPanel{
 	
 	public void showDialog(String message) {
 		JOptionPane.showMessageDialog(this, message);
+	}
+	
+	public long getWarehouseId() {
+		return warehouseId;
+	}
+	
+	public void setWarehouseId(long warehouseId) {
+		this.warehouseId = warehouseId;
 	}
 	
 	

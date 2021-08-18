@@ -85,4 +85,8 @@ public class WarehouseModel extends AbstractModel{
         	ex.printStackTrace();
         }
     }
+    
+    public boolean stillHaveStock(long warehouseId) {
+		return false;
+    }
 }
