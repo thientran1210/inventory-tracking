@@ -1,8 +1,8 @@
 package org.inventory.app;
 
-import org.inventory.menu.*;
-
 import java.awt.EventQueue;
+
+import org.inventory.view.menu.*;
 
 public class InventoryTracking {  
 	public static void main(String[] args) {

@@ -1,5 +1,8 @@
 package org.inventory.entities;
 
+import java.util.Set;
+import java.util.HashSet;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +15,8 @@ public class Warehouse {
 	private String state;
 	private long postcode;
 
+	private Set<CatalogDetail> catalogDetail = new HashSet<CatalogDetail>();
+	
 	public Warehouse() {
 		
 	}
@@ -68,4 +73,19 @@ public class Warehouse {
 	public void setPostcode(long postcode) {
 		this.postcode = postcode;
 	}
+	
+    @OneToMany(mappedBy = "primaryKey.warehouse",
+            cascade = CascadeType.ALL)
+    public Set<CatalogDetail> getCatalogDetail() {
+        return catalogDetail;
+    }
+ 
+    public void setCatalogDetail(Set<CatalogDetail> catalogDetail) {
+        this.catalogDetail = catalogDetail;
+    }
+     
+    public void addCatalogDetail(CatalogDetail catalogDetail) {
+        this.catalogDetail.add(catalogDetail);
+    }
+	
 }

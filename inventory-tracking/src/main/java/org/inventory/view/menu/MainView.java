@@ -1,4 +1,4 @@
-package org.inventory.menu;
+package org.inventory.view.menu;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -26,14 +26,12 @@ public class MainView{
 		mainFrame = new JFrame("Inventory Tracking");
 		mainPanel = new JPanel();
 		displayPanel = new JPanel();
-		JButton addNewItemBtn = new JButton("Add New Item");//creating instance of JButton  
-		JButton addNewCategoryBtn = new JButton("Add New Category");//creating instance of JButton  
-		JButton addNewWarehouseBtn = new JButton("Add New Warehouse");//creating instance of JButton  
+		JButton addNewItemBtn = new JButton("Item Master");//creating instance of JButton 
+		JButton addNewWarehouseBtn = new JButton("Warehouse Master");//creating instance of JButton  
 		JButton stockByWarehouseBtn = new JButton("Stock By Warehouse");//creating instance of JButton  
 		JButton stockAdjustmentBtn = new JButton("Stock Adjustment");//creating instance of JButton  
 		JButton stockMovementBtn = new JButton("Stock Movement Log");//creating instance of JButton  
 		btnList.add(addNewItemBtn);
-		btnList.add(addNewCategoryBtn);
 		btnList.add(addNewWarehouseBtn);
 		btnList.add(stockByWarehouseBtn);
 		btnList.add(stockAdjustmentBtn);

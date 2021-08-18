@@ -1,4 +1,4 @@
-package org.inventory.newwarehouse;
+package org.inventory.view.item;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -6,11 +6,12 @@ import java.awt.Font;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-public class NewWarehouseView extends JPanel{
+public class ItemView extends JPanel{
 	
 	private JTextField warehouseCode;
 	private JTextField address1;
@@ -19,15 +20,15 @@ public class NewWarehouseView extends JPanel{
 	private JTextField postcode;
 	private JButton saveBtn;
 	private JTable warehouseTable;
-	private NewWarehouseController newWarehouseController;
+	private ItemController itemController;
 	
-	public NewWarehouseView() {
+	public ItemView() {
 		this.initializeView();
 	}
 	
 	public void initializeView() {
 		//frame header
-		JLabel header = new JLabel("Warehouse");
+		JLabel header = new JLabel("Item Master");
 		header.setFont(new Font("", Font.PLAIN, 20));
 		
 		//warehouse code field and label
@@ -147,13 +148,17 @@ public class NewWarehouseView extends JPanel{
 		this.postcode = postcode;
 	}
 
-	public NewWarehouseController getNewWarehouseController() {
-		return newWarehouseController;
+	public ItemController getItemController() {
+		return itemController;
 	}
 
-	public void setNewWarehouseController(NewWarehouseController newWarehouseController) {
-		this.newWarehouseController = newWarehouseController;
-		this.saveBtn.addActionListener(newWarehouseController);
+	public void setItemController(ItemController itemController) {
+		this.itemController = itemController;
+		this.saveBtn.addActionListener(itemController);
+	}
+	
+	public void showDialog(String message) {
+		JOptionPane.showMessageDialog(this, message);
 	}
 	
 	

@@ -23,6 +23,7 @@ public final class HibernateUtil {
     	    factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
     	} catch (Exception ex) {
     	    StandardServiceRegistryBuilder.destroy(registry);
+    	    ex.printStackTrace();
     	}
 		return factory;
 	}
