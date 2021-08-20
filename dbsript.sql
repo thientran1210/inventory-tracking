@@ -32,17 +32,3 @@ CREATE TABLE IF NOT EXISTS catalog_detail (
     CONSTRAINT fk_item FOREIGN KEY (item_id) REFERENCES catalog (item_id),
     CONSTRAINT fk_warehouse FOREIGN KEY (warehouse_id) REFERENCES warehouse (warehouse_id)
 ) ENGINE=InnoDB;
-
-CREATE TABLE IF NOT EXISTS catalog_movement (
-    item_id int(11) NOT NULL,
-    warehouse_id_from int(11) NULL,
-    warehouse_id_to int(11) NULL,
-    movement_type_id int(11) NOT NULL,
-    log_msg varchar(512) NOT NULL,
-    KEY fk_item (item_id),
-    KEY fk_warehouse_from (warehouse_id_from),
-    KEY fk_warehouse_to (warehouse_id_to),
-    CONSTRAINT fk_item_3 FOREIGN KEY (item_id) REFERENCES catalog (item_id),
-    CONSTRAINT fk_warehouse_from FOREIGN KEY (warehouse_id_from) REFERENCES warehouse (warehouse_id),
-    CONSTRAINT fk_warehouse_to FOREIGN KEY (warehouse_id_to) REFERENCES warehouse (warehouse_id)
-) ENGINE=InnoDB;

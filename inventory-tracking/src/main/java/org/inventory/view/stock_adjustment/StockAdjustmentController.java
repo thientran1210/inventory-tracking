@@ -24,13 +24,13 @@ public class StockAdjustmentController implements ActionListener, ListSelectionL
 			this.stockAdjustmentView.clearField();
 			int i = this.stockAdjustmentView.getWarehouseTable().getSelectedRow();
 			if (i != -1) {
-				warehouseId = Long.parseLong((String) this.stockAdjustmentView.getWarehouseTableModel().getValueAt(i, 0));
+				warehouseId = (long)this.stockAdjustmentView.getWarehouseTableModel().getValueAt(i, 0);
 				this.stockAdjustmentView.setWarehouseId(warehouseId);
 				this.stockAdjustmentView.setWarehouseCode((String)this.stockAdjustmentView.getWarehouseTableModel().getValueAt(i, 1));
 			}
 			int j = this.stockAdjustmentView.getCatalogTable().getSelectedRow();
 			if (j != -1) {
-				itemId = Long.parseLong((String) this.stockAdjustmentView.getCatalogTableModel().getValueAt(j, 0));
+				itemId = (long)this.stockAdjustmentView.getCatalogTableModel().getValueAt(j, 0);
 				this.stockAdjustmentView.setItemId(itemId);
 				this.stockAdjustmentView.setItemCode((String)this.stockAdjustmentView.getCatalogTableModel().getValueAt(j, 1));
 			}

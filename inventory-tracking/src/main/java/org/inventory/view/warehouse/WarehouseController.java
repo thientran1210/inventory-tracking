@@ -103,7 +103,7 @@ public class WarehouseController implements ActionListener, ListSelectionListene
 	public void valueChanged(ListSelectionEvent e) {
 		int i = this.warehouseView.getWarehouseTable().getSelectedRow();
 		if (i != -1) {
-			this.warehouseView.setWarehouseId(Long.parseLong((String) this.warehouseView.getTableModel().getValueAt(i, 0)));
+			this.warehouseView.setWarehouseId((long)this.warehouseView.getTableModel().getValueAt(i, 0));
 			this.warehouseView.setWarehouseCode((String)this.warehouseView.getTableModel().getValueAt(i, 1));
 			this.warehouseView.setAddress1((String)this.warehouseView.getTableModel().getValueAt(i, 2));
 			this.warehouseView.setAddress2((String)this.warehouseView.getTableModel().getValueAt(i, 3));

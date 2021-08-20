@@ -84,7 +84,7 @@ public class ItemController implements ActionListener, ListSelectionListener{
 	public void valueChanged(ListSelectionEvent arg0) {
 		int i = this.itemView.getItemTable().getSelectedRow();
 		if (i != -1) {
-			this.itemView.setItemId(Long.parseLong((String) this.itemView.getTableModel().getValueAt(i, 0)));
+			this.itemView.setItemId((long)this.itemView.getTableModel().getValueAt(i, 0));
 			this.itemView.setItemCode((String)this.itemView.getTableModel().getValueAt(i, 1));
 			this.itemView.setDescription((String)this.itemView.getTableModel().getValueAt(i, 2));
 			this.itemView.setPrice(this.itemView.getTableModel().getValueAt(i, 3).toString());

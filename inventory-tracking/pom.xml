@@ -2,6 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.inventory</groupId>
   <artifactId>inventory-tracking</artifactId>
+  <packaging>jar</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>InventoryTrackingSystem</name>
 
@@ -12,33 +13,34 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.0</version>
+      	<artifactId>maven-assembly-plugin</artifactId>
         <configuration>
           <archive>
             <index>true</index>
-          <manifest>
-            <addClasspath>true</addClasspath>
-            <classpathPrefix>lib/</classpathPrefix>
-            <mainClass>org.inventory.app.Main</mainClass>
-          </manifest>
+	        <manifest>
+	          <addClasspath>true</addClasspath>
+	          <classpathPrefix>lib/</classpathPrefix>
+	          <mainClass>org.inventory.app.Main</mainClass>
+	        </manifest>
           </archive>
+          <descriptorRefs>
+              <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
         </configuration>
       </plugin>
     </plugins>
   </build>
-  <dependencies>
-    <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-core</artifactId>
-        <version>5.2.6.Final</version>
-    </dependency>
- 
-    <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <version>5.1.40</version>
-    </dependency>
-  </dependencies>
+         <dependencies>
+	   		<dependency>
+		        <groupId>org.hibernate</groupId>
+		        <artifactId>hibernate-core</artifactId>
+		        <version>5.2.6.Final</version>
+	    	</dependency>
+	
+		    <dependency>
+		        <groupId>mysql</groupId>
+		        <artifactId>mysql-connector-java</artifactId>
+		        <version>5.1.40</version>
+		    </dependency>
+  		</dependencies>
 </project>
