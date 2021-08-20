@@ -19,7 +19,7 @@ public class CatalogDetail {
     // composite-id key
     private CatalogWarehouseId primaryKey = new CatalogWarehouseId();
      
-    private long qty;
+    private long qty = 0;
  
     @EmbeddedId
     public CatalogWarehouseId getPrimaryKey() {

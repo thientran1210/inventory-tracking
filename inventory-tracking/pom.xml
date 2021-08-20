@@ -1,9 +1,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.inventory</groupId>
+  <groupId>org.inventory</groupId>
   <artifactId>inventory-tracking</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>InventoryTrackingSystem</name>
+
+  <properties>
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <maven.compiler.source>1.8</maven.compiler.source>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <archive>
+            <index>true</index>
+          <manifest>
+            <addClasspath>true</addClasspath>
+            <classpathPrefix>lib/</classpathPrefix>
+            <mainClass>org.inventory.app.Main</mainClass>
+          </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
   <dependencies>
     <dependency>
         <groupId>org.hibernate</groupId>
@@ -16,5 +40,5 @@
         <artifactId>mysql-connector-java</artifactId>
         <version>5.1.40</version>
     </dependency>
-</dependencies>
+  </dependencies>
 </project>

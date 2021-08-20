@@ -2,20 +2,16 @@ package org.inventory.dao;
 
 import java.util.List;
 
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.TypedQuery;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.inventory.entities.Catalog;
-import org.inventory.entities.CatalogDetail;
-import org.inventory.entities.CatalogWarehouseId;
 import org.inventory.entities.Warehouse;
 import org.inventory.util.HibernateUtil;
 
 public class WarehouseDAOImpl implements WarehouseDAO {
 
-	@Override
+	
 	public Warehouse getWarehouse(long warehouseId) {
         // get the warehouse by id
     	Session session = HibernateUtil.getSessionFactory().openSession();
@@ -33,7 +29,7 @@ public class WarehouseDAOImpl implements WarehouseDAO {
 		return null;
 	}
 
-	@Override
+	
 	public List<Warehouse> getAllWarehouse() {
         // get list of warehouses
     	Session session = HibernateUtil.getSessionFactory().openSession();
@@ -44,14 +40,13 @@ public class WarehouseDAOImpl implements WarehouseDAO {
 	        session.close();
 	        return warehouses;
 		} catch (HibernateException ex) {
-			ex.printStackTrace();
 	    	session.getTransaction().rollback();
 	    	session.close();
+	    	throw ex;
 		}
-		return null;
 	}
 
-	@Override
+	
 	public void createWarehouse(Warehouse warehouse) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -62,46 +57,47 @@ public class WarehouseDAOImpl implements WarehouseDAO {
 	        session.getTransaction().commit();
 	        session.close();
 		} catch (HibernateException ex){
-	    	ex.printStackTrace();
 	    	session.getTransaction().rollback();
 	    	session.close();
+	    	throw ex;
 	    }
 	}
 
-	@Override
-	public void updateWarehouse(Warehouse warehouse) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteWarehouse(long id) {
-		// TODO Auto-generated method stub
-
-	}
 	
-	@Override
-	public void getCatalogDetail(Warehouse warehouse, Catalog item) {
-		CatalogWarehouseId compositeKey = new CatalogWarehouseId();
-		compositeKey.setItem(item);
-		compositeKey.setWarehouse(warehouse);
+	public void updateWarehouse(Warehouse warehouse) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 	        session.beginTransaction();
 	     
-	        System.out.println(session.get(CatalogDetail.class, compositeKey)
-	        		.getPrimaryKey().getWarehouse());
+	        session.update(warehouse);
 	     
 	        session.getTransaction().commit();
 	        session.close();
 		} catch (HibernateException ex){
-	    	ex.printStackTrace();
 	    	session.getTransaction().rollback();
 	    	session.close();
+	    	throw ex;
 	    }
 	}
 
-	@Override
+	
+	public void deleteWarehouse(Warehouse warehouse) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+	        session.beginTransaction();
+	     
+	        session.delete(warehouse);
+	     
+	        session.getTransaction().commit();
+	        session.close();
+		} catch (HibernateException ex){
+	    	session.getTransaction().rollback();
+	    	session.close();
+	    	throw ex;
+	    }
+	}
+
+	
 	public Warehouse getWarehouseByCode(String warehouseCode) {
 		Warehouse warehouse = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -109,16 +105,16 @@ public class WarehouseDAOImpl implements WarehouseDAO {
 			String hql = "FROM Warehouse WHERE warehouseCode = :warehouse_code";
 	        session.beginTransaction();
 	     
-	        Query query = session.createQuery(hql);
+	        TypedQuery<Warehouse> query = session.createQuery(hql, Warehouse.class);
 	        query.setParameter("warehouse_code",warehouseCode);
 	        warehouse = (Warehouse) query.getSingleResult();
 	     
 	        session.getTransaction().commit();
 	        session.close();
 		} catch (HibernateException ex){
-	    	ex.printStackTrace();
 	    	session.getTransaction().rollback();
 	    	session.close();
+	    	throw ex;
 	    }
 		return warehouse;
 	}

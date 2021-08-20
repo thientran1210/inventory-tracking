@@ -13,20 +13,14 @@ CREATE TABLE IF NOT EXISTS warehouse (
     UNIQUE KEY warehouse_code_UNIQUE (warehouse_code)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS category (
-    category_id int(11) NOT NULL AUTO_INCREMENT,
-    name varchar(128) NOT NULL,
-    PRIMARY KEY (category_id),
-    UNIQUE KEY category_id_UNIQUE (category_id),
-    UNIQUE KEY category_name_UNIQUE (name)
-) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS catalog (
     item_id int(11) NOT NULL AUTO_INCREMENT,
+    item_code varchar(128) NOT NULL,
     description varchar(128) NOT NULL,
     price float NOT NULL,
     PRIMARY KEY (item_id),
-    UNIQUE KEY item_id_UNIQUE (item_id)
+    UNIQUE KEY item_id_UNIQUE (item_id),
+    UNIQUE KEY item_code_UNIQUE (item_code)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS catalog_detail (
@@ -37,16 +31,6 @@ CREATE TABLE IF NOT EXISTS catalog_detail (
     KEY fk_warehouse (warehouse_id),
     CONSTRAINT fk_item FOREIGN KEY (item_id) REFERENCES catalog (item_id),
     CONSTRAINT fk_warehouse FOREIGN KEY (warehouse_id) REFERENCES warehouse (warehouse_id)
-) ENGINE=InnoDB;
-
-CREATE TABLE IF NOT EXISTS catalog_category (
-    item_id int(11) NOT NULL, 
-    category_id int(11) NOT NULL,
-    qty int(11) NOT NULL,
-    KEY fk_item (item_id),
-    KEY fk_category (category_id),
-    CONSTRAINT fk_item_2 FOREIGN KEY (item_id) REFERENCES catalog (item_id),
-    CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES category (category_id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS catalog_movement (

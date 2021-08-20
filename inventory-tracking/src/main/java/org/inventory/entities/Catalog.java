@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @Table(name = "catalog")
 public class Catalog {
 	private long itemId;
+	private String itemCode;
 	private String description;
 	private float price;
 	
@@ -34,6 +35,15 @@ public class Catalog {
 
 	public void setItemId(long itemId) {
 		this.itemId = itemId;
+	}
+
+	@Column(name = "item_code")
+	public String getItemCode() {
+		return itemCode;
+	}
+
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
 	}
 
 	public String getDescription() {

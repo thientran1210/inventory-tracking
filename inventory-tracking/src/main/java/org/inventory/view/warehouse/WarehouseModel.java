@@ -2,91 +2,70 @@ package org.inventory.view.warehouse;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
-import org.inventory.entities.Catalog;
+import org.inventory.entities.CatalogDetail;
 import org.inventory.entities.Warehouse;
 import org.inventory.util.*;
-import org.inventory.dao.WarehouseDAO;
-import org.inventory.dao.WarehouseDAOImpl;
-import org.inventory.dao.CatalogDAO;
-import org.inventory.dao.CatalogDAOImpl;
 
 public class WarehouseModel extends AbstractModel{
 	
-	private CatalogDAO catalogDAO;
-	private WarehouseDAO warehouseDAO;
-	
 	public WarehouseModel() {
-		this.catalogDAO = new CatalogDAOImpl();
-		this.warehouseDAO = new WarehouseDAOImpl();
+		super();
+		getAllWarehouses();
 	}
 	
-    public void createNewWarehouse(String warehouseCode, String address1, String address2, String state, int postcode) {
-    	// create a new warehouse and persist to the database
+	//method to save/update warehouse
+    public void saveWarehouse(long warehouseId, 
+    		String warehouseCode, String address1, String address2, String state, int postcode) {
+    	
+    	// create a new warehouse instance and persist to the database
         Warehouse warehouse = new Warehouse();
+        warehouse.setWarehouseId(warehouseId);
         warehouse.setWarehouseCode(warehouseCode);
         warehouse.setAddress_1(address1);
         warehouse.setAddress_2(address2);
         warehouse.setState(state);
         warehouse.setPostcode(postcode);
-        
-        try {
-        	this.warehouseDAO.createWarehouse(warehouse);
-        } catch (HibernateException ex) {
-        	ex.printStackTrace();
-        }
-    }
- 
-    public List<Warehouse> getAllWarehouses() {
-    	List<Warehouse> warehouses = null;
-        try {
-        	warehouses = this.warehouseDAO.getAllWarehouse();
-        } catch (HibernateException ex) {
-        	ex.printStackTrace();
-        }
-        
-        return warehouses;
+    	if (warehouseId == 0) {
+    		this.getWarehouseDAO().createWarehouse(warehouse);
+    	} else {
+    		this.getWarehouseDAO().updateWarehouse(warehouse);
+    	}
+    	
+    	//after saving, refresh the list of warehouses
+    	getAllWarehouses();
     }
     
+    //method to search warehouse by using warehouse id
     public Warehouse getWarehouse(long warehouseId) {
     	Warehouse warehouse = null;
-        try {
-        	warehouse = this.warehouseDAO.getWarehouse(warehouseId);
-        } catch (HibernateException ex) {
-        	ex.printStackTrace();
-        }
+        warehouse = this.getWarehouseDAO().getWarehouse(warehouseId);
         
         return warehouse;
     }
     
+    //method to search warehouse by using warehouse code
     public Warehouse getWarehouseByCode(String warehouseCode) {
     	Warehouse warehouse = null;
-        try {
-        	warehouse = this.warehouseDAO.getWarehouseByCode(warehouseCode);
-        } catch (HibernateException ex) {
-        	ex.printStackTrace();
-        }
-        
+        warehouse = this.getWarehouseDAO().getWarehouseByCode(warehouseCode);
         return warehouse;
     }
     
-    public void updateWarehouse(Warehouse warehouse) {
-        try {
-        	this.warehouseDAO.updateWarehouse(warehouse);
-        } catch (HibernateException ex) {
-        	ex.printStackTrace();
-        }
+    //method to delete warehouse by warehouse id
+    public void deleteWarehouse(long warehouseId) throws ModelException {
+    	Warehouse warehouse = getWarehouse(warehouseId);
+    	//check if the warehouse exists
+    	if (warehouse != null) {
+    		//check if warehouse still has stock
+    		List<CatalogDetail> catalogDetails = this.getCatalogDetailDAO().getCatalogDetailByWarehouseId(warehouse.getWarehouseId());
+    		if (catalogDetails.size() > 0) {
+    			throw new ModelException("Error cannot delete. Warehouse still have stock available.");
+    		}
+    		this.getWarehouseDAO().deleteWarehouse(warehouse);
+    		this.getAllWarehouses();
+    	} else {
+    		throw new ModelException("Error cannot delete");
+    	}
     }
-    
-    public void deleteWarehouse(long warehouseId) {
-        try {
-        	this.warehouseDAO.deleteWarehouse(warehouseId);
-        } catch (HibernateException ex) {
-        	ex.printStackTrace();
-        }
-    }
-    
-    public boolean stillHaveStock(long warehouseId) {
-		return false;
-    }
+   
+  
 }

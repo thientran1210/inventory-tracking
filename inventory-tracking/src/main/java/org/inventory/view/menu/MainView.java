@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import org.inventory.util.HibernateUtil;
 
@@ -29,13 +32,11 @@ public class MainView{
 		JButton addNewItemBtn = new JButton("Item Master");//creating instance of JButton 
 		JButton addNewWarehouseBtn = new JButton("Warehouse Master");//creating instance of JButton  
 		JButton stockByWarehouseBtn = new JButton("Stock By Warehouse");//creating instance of JButton  
-		JButton stockAdjustmentBtn = new JButton("Stock Adjustment");//creating instance of JButton  
-		JButton stockMovementBtn = new JButton("Stock Movement Log");//creating instance of JButton  
+		JButton stockAdjustmentBtn = new JButton("Stock Adjustment");//creating instance of JButton    
 		btnList.add(addNewItemBtn);
 		btnList.add(addNewWarehouseBtn);
 		btnList.add(stockByWarehouseBtn);
 		btnList.add(stockAdjustmentBtn);
-		btnList.add(stockMovementBtn);
 		
 		//add box layout for main panel
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
